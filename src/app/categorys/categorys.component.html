@@ -1,1 +1,25 @@
-<p>categorys works!</p>
+<mat-accordion >
+  <mat-expansion-panel hideToggle>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Room 1
+      </mat-panel-title>
+      <mat-panel-description>
+        click here to expan
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>cats input here</p>
+  </mat-expansion-panel>
+  <mat-expansion-panel (opened)="panelOpenState = true"
+                       (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        Room type 2
+      </mat-panel-title>
+      <mat-panel-description>
+        click here to expan
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>cats input here</p>
+  </mat-expansion-panel>
+</mat-accordion>

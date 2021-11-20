@@ -12,6 +12,9 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
 // import {} from '@angular/material'
 import {MatTabsModule} from '@angular/material/tabs'
 import {MatButtonModule} from '@angular/material/button'
+import {MatGridListModule} from '@angular/material/grid-list'
+import {MatCardModule} from '@angular/material/card'
+import {MatExpansionModule} from '@angular/material/expansion'
 
 
 @NgModule({
@@ -27,7 +30,10 @@ import {MatButtonModule} from '@angular/material/button'
     AppRoutingModule,
     BrowserAnimationsModule,
     MatTabsModule,
-    MatButtonModule
+    MatButtonModule,
+    MatGridListModule,
+    MatCardModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]
