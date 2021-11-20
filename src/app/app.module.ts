@@ -11,6 +11,7 @@ import { FrontpageComponent } from './frontpage/frontpage.component';
 
 // import {} from '@angular/material'
 import {MatTabsModule} from '@angular/material/tabs'
+import {MatButtonModule} from '@angular/material/button'
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {MatTabsModule} from '@angular/material/tabs'
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MatTabsModule
+    MatTabsModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
