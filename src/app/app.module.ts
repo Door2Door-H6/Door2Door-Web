@@ -10,11 +10,12 @@ import { CategorysComponent } from './categorys/categorys.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 
 // import {} from '@angular/material'
-import {MatTabsModule} from '@angular/material/tabs'
-import {MatButtonModule} from '@angular/material/button'
-import {MatGridListModule} from '@angular/material/grid-list'
-import {MatCardModule} from '@angular/material/card'
-import {MatExpansionModule} from '@angular/material/expansion'
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatButtonModule} from '@angular/material/button';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatCardModule} from '@angular/material/card';
+import {MatExpansionModule} from '@angular/material/expansion';
+import { QRCodeModule } from "angularx-qrcode";
 
 
 @NgModule({
@@ -33,7 +34,8 @@ import {MatExpansionModule} from '@angular/material/expansion'
     MatButtonModule,
     MatGridListModule,
     MatCardModule,
-    MatExpansionModule
+    MatExpansionModule,
+    QRCodeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
