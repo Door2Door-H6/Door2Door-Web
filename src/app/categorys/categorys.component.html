@@ -1,25 +1,48 @@
-<mat-accordion >
-  <mat-expansion-panel hideToggle>
+<mat-accordion>
+  <!-- (opened)="panelOpenState = true" (closed)="panelOpenState = false" -->
+  <mat-expansion-panel>
     <mat-expansion-panel-header>
-      <mat-panel-title>
-        Room 1
-      </mat-panel-title>
+      <mat-panel-title>Klasse lokaler</mat-panel-title>
       <mat-panel-description>
-        click here to expan
+        <mat-icon>school</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>cats input here</p>
+    <p>B14</p>
+    <p>B16</p>
+    <p>B18</p>
+    <p>B26</p>
   </mat-expansion-panel>
-  <mat-expansion-panel (opened)="panelOpenState = true"
-                       (closed)="panelOpenState = false">
+  <mat-expansion-panel>
     <mat-expansion-panel-header>
       <mat-panel-title>
-        Room type 2
+        toilets
       </mat-panel-title>
       <mat-panel-description>
-        click here to expan
+        <mat-icon>wc</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <p>cats input here</p>
+    <p>lokale navne til wc..</p>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        trapper
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-icon>stairs</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>lokale navne til wc..</p>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        golf
+      </mat-panel-title>
+      <mat-panel-description>
+        <mat-icon>golf_course</mat-icon>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <p>golf courser?</p>
   </mat-expansion-panel>
 </mat-accordion>

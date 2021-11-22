@@ -16,6 +16,7 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { QRCodeModule } from "angularx-qrcode";
+import {MatIconModule} from '@angular/material/icon'
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import { QRCodeModule } from "angularx-qrcode";
     MatGridListModule,
     MatCardModule,
     MatExpansionModule,
-    QRCodeModule
+    QRCodeModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
