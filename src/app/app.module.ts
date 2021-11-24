@@ -15,8 +15,9 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatCardModule} from '@angular/material/card';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { QRCodeModule } from "angularx-qrcode";
-import {MatIconModule} from '@angular/material/icon'
+import { QRCodeModule } from 'angularx-qrcode';
+import {MatIconModule} from '@angular/material/icon';
+import { LeafletMapComponent } from './leaflet-map/leaflet-map.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import {MatIconModule} from '@angular/material/icon'
     TabsContainerComponent,
     CanvasMapComponent,
     CategorysComponent,
-    FrontpageComponent
+    FrontpageComponent,
+    LeafletMapComponent
   ],
   imports: [
     BrowserModule,
