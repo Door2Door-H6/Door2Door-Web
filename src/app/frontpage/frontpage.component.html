@@ -4,7 +4,7 @@
       <div>
         <mat-tab-group dynamicHeight>
           <mat-tab label="stue">
-            <app-leaflet-map></app-leaflet-map>
+            <app-leaflet-map-geojson></app-leaflet-map-geojson>
           </mat-tab>
           <mat-tab label="Kælder">
             <div class="example-large-box mat-elevation-z4">
@@ -16,10 +16,11 @@
     </mat-grid-tile>
     <mat-grid-tile>
       <app-categorys></app-categorys>
-      <qrcode [elementType]="elementType" [level]="level" [qrdata]="qrdata" [scale]="scale" [width]="width">
+      <qrcode style="margin: 1em;" [elementType]="elementType" [level]="level" [qrdata]="qrdata" [scale]="scale" [width]="width">
       </qrcode>
     </mat-grid-tile>
   </mat-grid-list>
+
   <!-- sdf -->
   <div style="float: left;">
   </div>
