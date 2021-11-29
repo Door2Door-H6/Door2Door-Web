@@ -28,8 +28,10 @@ import { LeafletMapGeojsonComponent } from './leaflet-map-geojson/leaflet-map-ge
     CanvasMapComponent,
     CategorysComponent,
     FrontpageComponent,
+    leaflet_geojson
     LeafletMapComponent,
-    LeafletMapGeojsonComponent
+    LeafletMapGeojsonComponent,
+    LeafletMapComponent
   ],
   imports: [
     BrowserModule,
