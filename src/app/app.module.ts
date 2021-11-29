@@ -18,6 +18,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { QRCodeModule } from 'angularx-qrcode';
 import {MatIconModule} from '@angular/material/icon';
 import { LeafletMapComponent } from './leaflet-map/leaflet-map.component';
+import { LeafletMapGeojsonComponent } from './leaflet-map-geojson/leaflet-map-geojson.component';
 
 
 @NgModule({
@@ -27,6 +28,9 @@ import { LeafletMapComponent } from './leaflet-map/leaflet-map.component';
     CanvasMapComponent,
     CategorysComponent,
     FrontpageComponent,
+    leaflet_geojson
+    LeafletMapComponent,
+    LeafletMapGeojsonComponent,
     LeafletMapComponent
   ],
   imports: [
