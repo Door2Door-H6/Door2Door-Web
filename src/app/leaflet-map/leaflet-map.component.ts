@@ -14,7 +14,7 @@ export class LeafletMapComponent implements AfterViewInit {
     this.map = L.map('map', {
       center: [11.783466, 55.427608],
       zoom: 0,
-      minZoom: 2,
+      minZoom: 0,
       maxZoom: 5
     });
 
@@ -105,5 +105,4 @@ export class LeafletMapComponent implements AfterViewInit {
   ngAfterViewInit(): void {
     this.initMap();
   }
-
 }
