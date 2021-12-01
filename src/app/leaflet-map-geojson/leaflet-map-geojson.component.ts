@@ -23,7 +23,7 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
   private initMap(): void {
     this.map = L.map('map', {
       zoom: 0,
-      minZoom: 14.5,
+      minZoom: 13.8,
       maxZoom: 20,
       zoomSnap: 0
     });
@@ -446,7 +446,7 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
 
     // Fly to path
     // this.map.flyToBounds(this.pathLayer.getBounds());
-    this.addRoomNames(6);
+    this.addRoomNames(1);
 
     // region events
     this.map.on('click', function(ev) {
@@ -456,16 +456,18 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
 
     this.map.on('zoomend', (e: Event) => {
       /// console.log(this.map._zoom);
+      this.roomNameLayer.clearLayers();
+      let a = this.map._zoom - 13.3;
+      console.log(a);
+      this.addRoomNames(a);
       if (this.map._zoom > this.zoomLevelRemoveIcons) {
         this.addPoi();
+
         if (this.previousZoomLevel < this.map._zoom){
-          this.roomNameLayer.clearLayers();
-          this.addRoomNames(3);
+
         }
       } else {
         if (this.previousZoomLevel > this.map._zoom){
-          this.roomNameLayer.clearLayers();
-          this.addRoomNames(6);
         }
         if (this.poiLayer != null) {
           this.poiLayer.clearLayers();
@@ -483,7 +485,7 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
           return L.marker(latlng, {
             icon: L.divIcon({
               className: 'room_label',
-              html: '<h' + size + '><b>' + feature.properties.name + '</b></h' + size + '>',
+              html: '<p style="font-size: ' + size + 'em"><b>' + feature.properties.name + '</b></p>',
               iconAnchor: [15, 15]
             })
           });
