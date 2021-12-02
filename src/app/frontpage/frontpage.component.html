@@ -1,11 +1,11 @@
-<mat-grid-list cols="3" rowHeight="1:1.5">
-  <mat-grid-tile colspan="2" style="background: blue">
+<mat-grid-list cols="3" rowHeight="100%">
+  <mat-grid-tile colspan="2">
     <div>
       <app-leaflet-map-geojson></app-leaflet-map-geojson>
     </div>
   </mat-grid-tile>
-  <mat-grid-tile colspan="1" style="background: red">
-    <app-categorys></app-categorys>
+  <mat-grid-tile colspan="1">
+    <app-categories></app-categories>
 
     <qrcode style="margin: 1em;" [elementType]="elementType" [level]="level" [qrdata]="qrdata" [scale]="scale"
             [width]="width">
