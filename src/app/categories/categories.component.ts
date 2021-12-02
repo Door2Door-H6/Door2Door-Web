@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {CategoryService} from '../../category.service';
 
 @Component({
-  selector: 'app-categorys',
+  selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss']
 })
@@ -11,15 +11,12 @@ import {CategoryService} from '../../category.service';
 * */
 export class CategoriesComponent {
   panelOpenState = false;
-  categories: string[][] = [];
+  categories: object;
 
   constructor(private cataeory: CategoryService) {
     this.cataeory.getCategoriesJSON();
-    this.cataeory.categories$.subscribe(x => {
-      if (x.length > 0) {
-        this.categories = JSON.parse(x);
-      }
-
+    this.cataeory.categories$.subscribe(catagoriesFromService => {
+        this.categories = catagoriesFromService;
     });
   }
 

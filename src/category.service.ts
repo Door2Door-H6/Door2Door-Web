@@ -6,11 +6,11 @@ import {ApiService} from './api.service';
   providedIn: 'root'
 })
 export class CategoryService {
-  categories$: BehaviorSubject<string> = new BehaviorSubject<string>('');
+  categories$: BehaviorSubject<object>;
 
   constructor(private apiService: ApiService) {}
 
   public getCategoriesJSON(): void {
-    const a = this.apiService.getJSON('/assets/room_katagories.json').subscribe( (x) => {this.categories$.next(  JSON.stringify(x)); });
+    this.apiService.getJSON('/assets/room_katagories.json').subscribe( (x) => {this.categories$.next(  JSON.stringify(x)); });
   }
 }
