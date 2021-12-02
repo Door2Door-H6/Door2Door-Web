@@ -12,7 +12,6 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
 
   private poiLayer;
   private wallLayer;
-  private pathLayer;
   private roomNameLayer;
   private poiGeoJSON;
   private roomNameGeoJSON;

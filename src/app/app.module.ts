@@ -19,7 +19,8 @@ import { QRCodeModule } from 'angularx-qrcode';
 import {MatIconModule} from '@angular/material/icon';
 import { LeafletMapComponent } from './leaflet-map/leaflet-map.component';
 import { LeafletMapGeojsonComponent } from './leaflet-map-geojson/leaflet-map-geojson.component';
-
+import {HttpClientModule} from '@angular/common/http';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,8 @@ import { LeafletMapGeojsonComponent } from './leaflet-map-geojson/leaflet-map-ge
     MatExpansionModule,
     QRCodeModule,
     MatIconModule,
+    HttpClientModule,
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
