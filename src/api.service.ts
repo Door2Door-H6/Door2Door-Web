@@ -13,9 +13,9 @@ export class ApiService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public async getJSON(endPoint: string): Promise<Observable<object>> {
-    console.log(this.httpClient.get(this.baseURL + endPoint));
-    return await this.httpClient.get(this.baseURL + endPoint)
+  public getJSON(endPoint: string): Observable<any> {
+    //console.log(this.httpClient.get(this.baseURL + endPoint));
+    return this.httpClient.get(this.baseURL + endPoint)
   }
 
   public getGeoJSON(endPoint: string): Observable<string> {
