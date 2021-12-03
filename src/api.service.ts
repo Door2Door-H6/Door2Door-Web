@@ -17,8 +17,4 @@ export class ApiService {
     //console.log(this.httpClient.get(this.baseURL + endPoint));
     return this.httpClient.get(this.baseURL + endPoint)
   }
-
-  public getGeoJSON(endPoint: string): Observable<string> {
-    return this.httpClient.get(this.baseURL + endPoint, {responseType: 'text'});
-  }
 }
