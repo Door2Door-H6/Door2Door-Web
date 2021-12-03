@@ -13,9 +13,9 @@ export class CategoriesComponent {
   panelOpenState = false;
   categories: object;
 
-  constructor(private cataeory: CategoryService) {
-    this.cataeory.getCategoriesJSON();
-    this.cataeory.categories$.subscribe(catagoriesFromService => {
+  constructor(private cateory: CategoryService) {
+    this.cateory.getCategoriesJSON();
+    this.cateory.categories$.subscribe(catagoriesFromService => {
         this.categories = catagoriesFromService;
     });
   }

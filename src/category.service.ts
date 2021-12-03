@@ -8,9 +8,12 @@ import {ApiService} from './api.service';
 export class CategoryService {
   categories$: BehaviorSubject<object>;
 
-  constructor(private apiService: ApiService) {}
+  constructor(private apiService: ApiService) {
+  }
 
-  public getCategoriesJSON(): void {
-    this.apiService.getJSON('/assets/room_katagories.json').subscribe( (x) => {this.categories$.next(  JSON.stringify(x)); });
+  public async getCategoriesJSON(): Promise<void> {
+    await (await this.apiService.getJSON('/assets/room_katagories.json')).subscribe((categoriesFromAPI) => {
+      this.categories$.next(categoriesFromAPI);
+    });
   }
 }

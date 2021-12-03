@@ -13,7 +13,12 @@ export class ApiService {
   constructor(private httpClient: HttpClient) {
   }
 
-  public getJSON(endPoint: string): Observable<object> {
-    return this.httpClient.get(this.baseURL + endPoint);
+  public async getJSON(endPoint: string): Promise<Observable<object>> {
+    console.log(this.httpClient.get(this.baseURL + endPoint));
+    return await this.httpClient.get(this.baseURL + endPoint)
+  }
+
+  public getGeoJSON(endPoint: string): Observable<string> {
+    return this.httpClient.get(this.baseURL + endPoint, {responseType: 'text'});
   }
 }
