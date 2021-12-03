@@ -11,9 +11,9 @@ export class CategoryService {
   constructor(private apiService: ApiService) {
   }
 
-  public async getCategoriesJSON(): Promise<void> {
+  public async getCategoriesJSON(): Promise<void> {/*
     await (await this.apiService.getJSON('/assets/room_katagories.json')).subscribe((categoriesFromAPI) => {
       this.categories$.next(categoriesFromAPI);
-    });
+    });*/
   }
 }

@@ -11,13 +11,13 @@ export class GeographicalDataService {
   constructor(private apiService: ApiService) {
   }
 
-  public getWallsGeoJSON(): void {
+  public getWallsGeoJSON(): void {/*
     this.apiService.getJSON('/assets/wallsGeoJSON.geojson').then(x => { x.subscribe((geoJSONFromAPI) => {
       console.log(geoJSONFromAPI);
       if (geoJSONFromAPI != null){
         console.log(JSON.stringify(geoJSONFromAPI))
         //this.wallsGeoJSON$.next(geoJSONFromAPI);
       }
-    })});
+    })});*/
   }
 }
