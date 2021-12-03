@@ -390,14 +390,15 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
     this.geographicalDataService.getWallsGeoJSON();
     this.geographicalDataService.getWallsGeoJSON().subscribe(wallsGeoJSONFromService => {
       console.log(wallsGeoJSONFromService);
-      this.wallLayer = L.geoJSON(wallsGeoJSONFromService, {
+      console.log(typeof(wallsGeoJSONFromService));
+      this.wallLayer = L.geoJSON(JSON.parse(wallsGeoJSONFromService), {
         style(feature) {
           return {color: feature.properties.color}; // Assign a style based on the geoJSON color property
         }
       }).addTo(this.map);
+
       // Zoom to wall layer
       this.map.fitBounds(this.wallLayer.getBounds());
-      console.log(this.wallLayer);
     });
 
 
@@ -431,9 +432,8 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
     this.map.on('zoomend', (e: Event) => {
       /// console.log(this.map._zoom);
       this.roomNameLayer.clearLayers();
-      let a = this.map._zoom - 13.3;
-      console.log(a);
-      this.addRoomNames(a);
+      let font_size_from_zoom_level = this.map._zoom - 13.3;
+      this.addRoomNames(font_size_from_zoom_level);
       if (this.map._zoom > this.zoomLevelRemoveIcons) {
         this.addPoi();
 

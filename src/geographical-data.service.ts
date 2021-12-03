@@ -12,6 +12,6 @@ export class GeographicalDataService {
   }
 
   public getWallsGeoJSON(): Observable<any> {
-    return this.apiService.getJSON('/assets/wallsGeoJSON.geojson');
+    return this.apiService.getJSON('/Wall?location=sr');
   }
 }
