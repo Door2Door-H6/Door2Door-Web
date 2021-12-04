@@ -17,6 +17,7 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
   private poiGeoJSON;
   private roomNameGeoJSON;
   private previousZoomLevel = 0;
+  path: string;
 
   private map;
 
@@ -64,19 +65,41 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
     // Fly to path
     // this.map.flyToBounds(this.pathLayer.getBounds());
     this.addRoomNames(1);
-
-    // region events Wolters ansvar
-    this.map.on('click', function (ev) {
-      console.log(`Clicked on map`); // ev is an event object (MouseEvent in this case)
+    /*
+        // region events Wolters ansvar
+        this.map.on('click', function (ev) {
+          // console.log(`Clicked on map`); // ev is an event object (MouseEvent in this case)
+          let tmp_room_name = ev.originalEvent.target.innerHTML;
+          let room_name = ""
+          if (tmp_room_name == "") {
+            room_name = ev.originalEvent.target.className.animVal.toString().replace(" leaflet-interactive", " ");
+          } else {
+            room_name = tmp_room_name;
+          }
+          // Fly to path
+          // this.pathLayer = L.geoJSON().addTo(this.map);
+          // this.map.flyToBounds(this.pathLayer.getBounds());
+          console.log(room_name);
+        });
+        */
+    // --Start Test---\\
+    this.map.on('click', ev => {
+      // console.log(`Clicked on map`); // ev is an event object (MouseEvent in this case)
       let tmp_room_name = ev.originalEvent.target.innerHTML;
       let room_name = ""
       if (tmp_room_name == "") {
-        room_name = ev.originalEvent.target.className.animVal.toString().replace(" leaflet-interactive"," ");
+        room_name = ev.originalEvent.target.className.animVal.toString().replace(" leaflet-interactive", " ");
       } else {
         room_name = tmp_room_name;
       }
-      console.log(room_name);
+      // Fly to path
+      // this.map.flyToBounds(this.pathLayer.getBounds());
+      this.getpath(room_name);
+      // this.pathLayer = L.geoJSON().addTo(this.map);
+      L.geoJSON(JSON.parse(this.path)).addTo(this.map).bringToFront();
+      console.log(this.path);
     });
+    // --End Test---\\
 
     this.map.on('zoomend', (e: Event) => {
       /// console.log(this.map._zoom);
@@ -101,6 +124,13 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
     });
     // endregion
 
+  }
+
+  getpath(endpoiName: string) {
+    this.geographicalDataService.getPath(2, endpoiName).subscribe(data => {
+      this.path = data;
+      // console.log(data);
+    });
   }
 
   private addRoomNames(size: any): void {

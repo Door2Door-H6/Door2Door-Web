@@ -23,5 +23,10 @@ export class GeographicalDataService {
   public getLabelsGeoJSON(): Observable<any> {
     return this.apiService.getJSON('/RoomLabel?location=ss');
   }
+  public getPath(startpoiId:number,endpoiName:string): Observable<any> {
+
+    return this.apiService.getJSON('/Path?standId='+ startpoiId + '&roomName='+endpoiName);
+  }
+
 
 }
