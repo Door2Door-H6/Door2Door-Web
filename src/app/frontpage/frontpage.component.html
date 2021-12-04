@@ -1,21 +1,24 @@
 <mat-grid-list cols="3" rowHeight="100%">
   <mat-grid-tile colspan="2">
     <div>
-      <app-leaflet-map-geojson></app-leaflet-map-geojson>
       <mat-tab-group mat-align-tabs="center" dynamicHeight style="display: block; height: 100%;">
         <mat-tab label="Stue">
-            <!-- <app-leaflet-map-geojson></app-leaflet-map-geojson> -->
+          <div style="height: 25rem; width: 28rem;">
+            <p>s</p>
+            <app-leaflet-map-geojson></app-leaflet-map-geojson>
+          </div>
         </mat-tab>
-        <mat-tab label="kælder">insert seckon level here when made</mat-tab>
+        <mat-tab label="kælder">
+          <div *ngIf="true">
+            <qrcode style="margin: 1em;" [elementType]="elementType" [level]="level" [qrdata]="qrdata" [scale]="scale"
+            [width]="width">
+          </qrcode>
+        </div>
+        </mat-tab>
       </mat-tab-group>
     </div>
   </mat-grid-tile>
   <mat-grid-tile colspan="1">
     <app-categories></app-categories>
-    <div *ngIf="false">
-      <qrcode style="margin: 1em;" [elementType]="elementType" [level]="level" [qrdata]="qrdata" [scale]="scale"
-      [width]="width">
-    </qrcode>
-  </div>
   </mat-grid-tile>
 </mat-grid-list>
