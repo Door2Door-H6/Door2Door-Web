@@ -1,4 +1,5 @@
 import {Component, OnInit} from '@angular/core';
+import {Layer, Map} from 'leaflet';
 
 @Component({
   selector: 'app-frontpage',
@@ -20,6 +21,17 @@ export class FrontpageComponent implements OnInit {
     this.scale = 1;
     this.width = 128;
 
+  }
+  private map: Map;
+  private zoom: number;
+
+  receiveMap(map: Map) {
+    this.map = map;
+    map.addLayer(new Layer());
+  }
+
+  receiveZoom(zoom: number) {
+    this.zoom = zoom;
   }
 
   ngOnInit(): void {

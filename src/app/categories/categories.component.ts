@@ -11,12 +11,12 @@ import {CategoryService} from '../../category.service';
 * */
 export class CategoriesComponent {
   panelOpenState = false;
-  categories: object;
+  categories:string;
 
   constructor(private cateory: CategoryService) {
-    this.cateory.getCategoriesJSON();
-    this.cateory.categories$.subscribe(catagoriesFromService => {
-        this.categories = catagoriesFromService;
+    this.cateory.getCategoriesJSON().subscribe(result => {
+      console.log(result);
+      this.categories = result;
     });
   }
 

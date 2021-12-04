@@ -1,13 +1,13 @@
 <mat-accordion>
   <!--  &lt;!&ndash; (opened)="panelOpenState = true" (closed)="panelOpenState = false" &ndash;&gt;-->
-  <mat-expansion-panel *ngFor="let keyname of categories | keyvalue">
+  <mat-expansion-panel *ngFor="let keyname of categories; index as i;">
     <mat-expansion-panel-header>
-      <mat-panel-title>{{keyname.key}}</mat-panel-title>
+      <mat-panel-title>{{keyname.name}}</mat-panel-title>
       <mat-panel-description>
         <mat-icon>school</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <p *ngFor="let cat of categories[keyname.key]" (click)="RouteRoom(cat)">
+    <p *ngFor="let cat of categories[i].rooms" (click)="RouteRoom(cat)">
       {{cat}}
     </p>
   </mat-expansion-panel>

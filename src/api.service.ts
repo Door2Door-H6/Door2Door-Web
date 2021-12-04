@@ -8,7 +8,7 @@ import {observable, Observable} from 'rxjs';
 })
 export class ApiService {
   // https://door2door.dk:5000
-  private baseURL = 'http://10.108.130.188:5000';
+  private baseURL = 'http://localhost:5000';
 
   constructor(private httpClient: HttpClient) {
   }
