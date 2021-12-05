@@ -12,5 +12,8 @@
 
 #map {
   height: 100%;
-  // background: transparent;
+  // background: content-box radial-gradient(darkblue, lightblue);
+  background-blend-mode: difference;
+  background: transparent;
+  // opacity: 10%;
 }

@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import * as L from 'leaflet';
 import { GeographicalDataService } from '../../geographical-data.service';
-import { antPath } from 'leaflet-ant-path';
+import { AntPath, antPath } from 'leaflet-ant-path';
 
 @Component({
   selector: 'app-leaflet-map-geojson',
@@ -18,29 +18,57 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
   private roomNameGeoJSON;
   private previousZoomLevel = 0;
   pathlayer;
+  private antpath;
   path: string;
   private map;
+  antpathCords = [[]];
 
   constructor(private geographicalDataService: GeographicalDataService) {
-    // this.geographicalDataService.getWallsGeoJSON();
+
+    //this leves here to make sure it gets a subscribement before the map is startede
     this.geographicalDataService.path.subscribe(x => {
       if (x.length != 1) {
         this.path = x;
+        if(this.pathlayer != null){
+          this.pathlayer.remove();
+        }
         this.pathlayer = L.geoJSON(JSON.parse(this.path)).addTo(this.map);
-          console.log(x);
+        //Work in progress for animations
+        if(x != null && x.toString() != undefined){
+          JSON.parse(x).forEach(x => {
+            if (x != null && x.toString().length >= 16) {
+              x["geometry"]["coordinates"].forEach(element => {
+                this.antpathCords.push(element)
+                // console.log(element);
+              });
+            }
+            // ;["geometry"]["coordinates"]
+          // console.log(this.antpathCords);
+          });
+        }
 
       }
     })
   }
 
-
+  /**
+   * This is for the ant animation
+   * currently in testing mode.
+   */
   animatiePath() {
-    const patha = antPath(this.path, {
+    // console.log(JSON.parse(this.path));
+    const testpath = L.polyline([[0.0226533224883368, 0.01458551214098806],
+    [0.02265143243140368, 0.01370664731477044],
+    [0.01517240352217164, 0.01370549374272562],
+    [0.01303635308542932, 0.01370447294133173],
+    [0.01304047148156086, 0.01190473383184866],
+    [0.01304047148156086, 0.01190473383184866],
+    [0.01305700401023055, 0.0059866495250372]]);
+
+    // JSON.parse(this.path)[0]["geometry"]["coordinates"]
+    const patha = antPath(this.antpathCords, {
       "delay": 400,
-      "dashArray": [
-        10,
-        20
-      ],
+      "dashArray": [10, 20],
       "weight": 5,
       "color": "#0000FF",
       "pulseColor": "#FFFFFF",
@@ -48,48 +76,77 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
       "reverse": false,
       "hardwareAccelerated": true
     });
+    patha.addTo(this.map);
+    this.antpath = patha;
   }
 
-
+  /**
+   * creates the map
+   * This makes sure eveything is startede in the rigth order.
+   */
   private initMap(): void {
+
+    this.setMapOptions();
+    this.getRooms();
+    this.addRoomNames(1);
+    this.mapEvents();
+    this.getWalls();
+
+  }
+
+  /**
+   * Sets the requied map optiones
+   */
+  private setMapOptions() {
     this.map = L.map('map', {
       zoom: 0,
       minZoom: 13.8,
       maxZoom: 20,
       zoomSnap: 0,
       dragging: true,
-
+      crs: L.CRS.EPSG3395,
+      zoomControl: false
     });
+    // Set the map option to CRS EPSG3395 (Cordinate refence system) what cordinates system is to be used with geojson.
+    // NOTE: the database is running EPSG4323
+    // All lengths is in km becuse of this (eg. 3.45566 km just remove km and add M)
+    // Then it is the rigth distance.
+  }
 
-    // Set the map option to CRS EPSG3395 as that is the format our geoJSON is in
-    this.map.options.crs = L.CRS.EPSG3395;
+  private getRooms() {
+    this.geographicalDataService.getRoomGeoJSON().subscribe(roomsGeoJSON => {
+      L.geoJSON(JSON.parse(roomsGeoJSON), {
+        style(feature) {
+          let colorArray = ["green", "blue", "grey", "darkred", "purple", "#36003d", "red"]
+          return {
+            color: colorArray[feature.properties.color],
+            className: feature.properties.name,
+            weight:1,
+            fillOpacity:0.6
+          }; // Assign a style based on the geoJSON color property
+        }
+      }).addTo(this.map);
+    });
+  }
 
-
+  private getWalls() {
     this.geographicalDataService.getWallsGeoJSON().subscribe(wallsGeoJSONFromService => {
       this.wallLayer = L.geoJSON(JSON.parse(wallsGeoJSONFromService), {
         style(feature) {
-          return { color: "#005C34" }; // Assign a style based on the geoJSON color property
+          return { color: "#005C34" };
         }
       }).addTo(this.map);
+
       // Zoom to wall layer
-      this.map.padding = [10,0];
+      this.map.padding = [10, 0];
       this.map.fitBounds(this.wallLayer.getBounds());
       this.map.setMaxBounds(this.wallLayer.getBounds());
 
 
     });
+  }
 
-    this.geographicalDataService.getRoomGeoJSON().subscribe(roomsGeoJSON => {
-      L.geoJSON(JSON.parse(roomsGeoJSON), {
-        style(feature) {
-          let colorArray = ["green", "blue", "grey", "darkred", "purple", "yellow", "red"]
-          return { color: colorArray[feature.properties.color], className: feature.properties.name }; // Assign a style based on the geoJSON color property
-        }
-      }).addTo(this.map);
-    });
-
-    this.addRoomNames(1);
-
+  private mapEvents() {
     // --Start Test---\\
     this.map.on('click', ev => {
       // console.log(`Clicked on map`); // ev is an event object (MouseEvent in this case)
@@ -103,12 +160,11 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
       // Fly to path
       // this.map.flyToBounds(this.pathLayer.getBounds());
       this.getpath(room_name);
-      if (true) {
+      if (this.pathlayer != null) {
         this.pathlayer.remove();
-        L.geoJSON(this.pathlayer).addTo(this.map).bringToFront();
-        // this.animatiePath();
-        // this.pathlayer = L.geoJSON(JSON.parse(this.path)).addTo(this.map);
-        // L.geoJSON(JSON.parse(this.path)).addTo(this.map).bringToFront();
+        // L.geoJSON(this.pathlayer).addTo(this.map).bringToFront();
+        this.animatiePath();
+        // this.antpath.addTo(this.map);
       }
 
       // console.log(this.path);
@@ -137,7 +193,6 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
       this.previousZoomLevel = this.map._zoom;
     });
     // endregion
-
   }
 
   getpath(endpoiName: string) {
@@ -165,7 +220,6 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
     if (this.poiLayer == null) {
       const doorIcon = L.icon({
         iconUrl: '/assets/door_white.png',
-
         iconSize: [30, 30], // size of the icon
         iconAnchor: [15, 15], // point of the icon which will correspond to marker's location
         popupAnchor: [-3, -76] // point from which the popup should open relative to the iconAnchor
@@ -173,7 +227,7 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
 
       this.poiLayer = L.geoJSON(this.poiGeoJSON, {
         pointToLayer(feature, latlng) {
-          return L.marker(latlng, { icon: doorIcon });
+          return L.marker(latlng, { icon: doorIcon },);
         }
       }).addTo(this.map);
     }

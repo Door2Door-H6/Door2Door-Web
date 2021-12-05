@@ -28,7 +28,7 @@ export class GeographicalDataService {
 
     let ops = this.apiService.getJSON('/Path?standId='+ startpoiId + '&roomName='+endpoiName);
     ops.subscribe(x => {
-      console.log(x);
+      // console.log(x);
       this.path.next(x);
 
     })
