@@ -8,6 +8,9 @@ import { AntPath, antPath } from 'leaflet-ant-path';
   templateUrl: './leaflet-map-geojson.component.html',
   styleUrls: ['./leaflet-map-geojson.component.scss']
 })
+/**
+ * This class handles eveything map leaflet relatede.
+ */
 export class LeafletMapGeojsonComponent implements AfterViewInit {
 
   private zoomLevelRemoveIcons = 15;
@@ -122,6 +125,9 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
     // Then it is the rigth distance.
   }
 
+  /**
+   * This calls the api for the rooms (they are in ploygon format)
+   */
   private getRooms() {
     this.geographicalDataService.getRoomGeoJSON().subscribe(roomsGeoJSON => {
       L.geoJSON(JSON.parse(roomsGeoJSON), {
@@ -138,6 +144,9 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
     });
   }
 
+  /**
+   * This calls the api for the Area (eg. zbc )
+   */
   private getWalls() {
     this.geographicalDataService.getWallsGeoJSON().subscribe(wallsGeoJSONFromService => {
       this.wallLayer = L.geoJSON(JSON.parse(wallsGeoJSONFromService), {
@@ -155,10 +164,11 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
     });
   }
 
+/**
+ * Clik event to show the path/Route on the map when the user clicks on the map.
+ */
   private mapEvents() {
-    // --Start Test---\\
     this.map.on('click', ev => {
-      // console.log(`Clicked on map`); // ev is an event object (MouseEvent in this case)
       let tmp_room_name = ev.originalEvent.target.innerHTML;
       let room_name = ""
       if (tmp_room_name == "") {
@@ -171,14 +181,10 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
       this.getpath(room_name);
       if (this.pathlayer != null) {
         this.pathlayer.remove();
-        // L.geoJSON(this.pathlayer).addTo(this.map).bringToFront();
         this.animatiePath();
-        // this.antpath.addTo(this.map);
+        // this.antpath.addTo(this.map); // this is for the animation of the path
       }
-
-      // console.log(this.path);
     });
-    // --End Test---\\
 
     this.map.on('zoomend', (e: Event) => {
       /// console.log(this.map._zoom);
@@ -207,10 +213,18 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
     // endregion
   }
 
+  /**
+   * this calls the api for a route to the end point nammed endpoiName.
+   * @param endpoiName the piont to navigate too
+   */
   getpath(endpoiName: string) {
     this.geographicalDataService.getPath(2, endpoiName);
   }
 
+  /**
+   * this calls the api for the labels for the rooms.
+   * @param size used for font size
+   */
   private addRoomNames(size: any): void {
     this.geographicalDataService.getLabelsGeoJSON().subscribe(roomNameGeoJSON => {
       this.roomNameLayer = L.geoJSON(JSON.parse(roomNameGeoJSON), {
@@ -228,6 +242,9 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
 
   }
 
+  /**
+   * Points used for navigation
+   */
   private addPoi(): void {
     if (this.poiLayer == null) {
       const doorIcon = L.icon({
