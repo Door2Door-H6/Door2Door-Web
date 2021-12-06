@@ -1,5 +1,7 @@
 import { Component, HostListener } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'app-root',
@@ -10,15 +12,20 @@ export class AppComponent {
   userActivity;
   userInactive: Subject<any> = new Subject();
 
-  constructor() {
+  constructor(private router: Router, private dataserver: ApiService) {
     this.setTimeout();
-    this.userInactive.subscribe(() => console.log('user has been inactive for 3s'));
+    this.userInactive.subscribe(() => {
+      if (this.dataserver.hasChange) {
+        window.location.reload(); console.log("user interative")
+      }
+    });
   }
 
   title = 'Door2Door';
 
   @HostListener('window:mousemove') refreshUserState() {
-  clearTimeout(this.userActivity);
+    this.dataserver.hasChange.next(true);
+    clearTimeout(this.userActivity);
     this.setTimeout();
   }
 

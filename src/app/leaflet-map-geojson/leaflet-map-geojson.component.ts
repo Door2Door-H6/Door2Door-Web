@@ -29,12 +29,20 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
     this.geographicalDataService.path.subscribe(x => {
       if (x.length != 1) {
         this.path = x;
-        if(this.pathlayer != null){
+        if (this.pathlayer != null) {
           this.pathlayer.remove();
         }
-        this.pathlayer = L.geoJSON(JSON.parse(this.path)).addTo(this.map);
+        this.pathlayer = L.geoJSON(JSON.parse(this.path), {
+          style(feature) {
+            return {
+              color: "red",
+              weight: 2,
+              fillOpacity: 0.6
+            };
+          }
+        }).addTo(this.map);
         //Work in progress for animations
-        if(x != null && x.toString() != undefined){
+        if (x != null && x.toString() != undefined) {
           JSON.parse(x).forEach(x => {
             if (x != null && x.toString().length >= 16) {
               x["geometry"]["coordinates"].forEach(element => {
@@ -43,7 +51,7 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
               });
             }
             // ;["geometry"]["coordinates"]
-          // console.log(this.antpathCords);
+            // console.log(this.antpathCords);
           });
         }
 
@@ -121,8 +129,8 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
           return {
             color: colorArray[feature.properties.color],
             className: feature.properties.name,
-            weight:1,
-            fillOpacity:0.6
+            weight: 1,
+            fillOpacity: 0.6
           }; // Assign a style based on the geoJSON color property
         }
       }).addTo(this.map);

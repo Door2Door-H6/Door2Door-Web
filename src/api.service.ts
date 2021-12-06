@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {observable, Observable} from 'rxjs';
+import {BehaviorSubject, observable, Observable} from 'rxjs';
 
 
 @Injectable({
@@ -8,8 +8,9 @@ import {observable, Observable} from 'rxjs';
 })
 export class ApiService {
   // https://door2door.dk:5000
-  private baseURL = 'http://localhost:5000';
+  private baseURL = 'http://10.108.130.228:5000';
 
+  hasChange:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor(private httpClient: HttpClient) {
   }
 
