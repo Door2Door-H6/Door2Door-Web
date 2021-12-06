@@ -3,7 +3,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TabsContainerComponent } from './tabs-container/tabs-container.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { FrontpageComponent } from './frontpage/frontpage.component';
 import { LeafletMapGeojsonComponent } from './leaflet-map-geojson/leaflet-map-geojson.component';
@@ -19,14 +18,15 @@ import {MatIconModule} from '@angular/material/icon';
 import {HttpClientModule} from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
+import { QrcodeComponent } from './qrcode/qrcode.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TabsContainerComponent,
     CategoriesComponent,
     FrontpageComponent,
     LeafletMapGeojsonComponent,
+    QrcodeComponent,
   ],
   imports: [
     BrowserModule,

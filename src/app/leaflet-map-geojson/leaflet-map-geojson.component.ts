@@ -67,28 +67,7 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
    * currently in testing mode.
    */
   animatiePath() {
-    // console.log(JSON.parse(this.path));
-    const testpath = L.polyline([[0.0226533224883368, 0.01458551214098806],
-    [0.02265143243140368, 0.01370664731477044],
-    [0.01517240352217164, 0.01370549374272562],
-    [0.01303635308542932, 0.01370447294133173],
-    [0.01304047148156086, 0.01190473383184866],
-    [0.01304047148156086, 0.01190473383184866],
-    [0.01305700401023055, 0.0059866495250372]]);
-
-    // JSON.parse(this.path)[0]["geometry"]["coordinates"]
-    const patha = antPath(this.antpathCords, {
-      "delay": 400,
-      "dashArray": [10, 20],
-      "weight": 5,
-      "color": "#0000FF",
-      "pulseColor": "#FFFFFF",
-      "paused": false,
-      "reverse": false,
-      "hardwareAccelerated": true
-    });
-    patha.addTo(this.map);
-    this.antpath = patha;
+    //TODO:Add antpath animation here
   }
 
   /**

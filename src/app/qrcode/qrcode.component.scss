@@ -1,0 +1,23 @@
+.map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.map-frame {
+  height: 100%;
+}
+
+#map {
+  height: 100%;
+  // background: content-box radial-gradient(darkblue, lightblue);
+  background-blend-mode: difference;
+  background: transparent;
+  // opacity: 10%;
+}
+
+.room_label{
+  font-optical-sizing: 4;
+}

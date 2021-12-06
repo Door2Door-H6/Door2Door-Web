@@ -9,6 +9,7 @@ export class GeographicalDataService {
 
   path: BehaviorSubject<string> = new BehaviorSubject("1");
   public qrshowing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
+  endpoi$: BehaviorSubject<string> = new BehaviorSubject<string>("B16");
 
   constructor(private apiService: ApiService) {
   }
@@ -26,7 +27,7 @@ export class GeographicalDataService {
     return this.apiService.getJSON('/RoomLabel?location=ss');
   }
   public getPath(startpoiId: number, endpoiName: string) {
-
+    this.endpoi$.next(endpoiName);
     this.qrshowing$.next(true);
     let ops = this.apiService.getJSON('/Path?standId=' + startpoiId + '&roomName=' + endpoiName);
     ops.subscribe(x => {
