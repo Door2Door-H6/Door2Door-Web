@@ -95,10 +95,10 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
   private initMap(): void {
 
     this.setMapOptions();
+    this.getWalls();
     this.getRooms();
     this.addRoomNames(1);
     this.mapEvents();
-    this.getWalls();
     // this.addPoi();
 
   }
@@ -114,10 +114,10 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
       zoomSnap: 0,
       dragging: true,
       crs: L.CRS.EPSG3395,
-      zoomControl: true
+      zoomControl: false
     });
     // Set the map option to CRS EPSG3395 (Cordinate refence system) what cordinates system is to be used with geojson.
-    // NOTE: the database is running EPSG4323
+    // NOTE: the database is running EPSG4326
     // All lengths is in km becuse of this (eg. 3.45566 km just remove km and add M)
     // Then it is the rigth distance.
   }
