@@ -7,8 +7,9 @@ import {BehaviorSubject, observable, Observable} from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  // https://door2door.dk:5000
-  private baseURL = 'http://10.108.130.228:5000';
+  // http://localhost:4200
+  // http://10.108.130.228:5000
+  private baseURL = 'https://door2door.dk:5001';
 
   hasChange:BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   constructor(private httpClient: HttpClient) {
