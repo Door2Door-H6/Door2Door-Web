@@ -182,7 +182,9 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
 
     this.map.on('zoomend', (e: Event) => {
       /// console.log(this.map._zoom);
-      this.roomNameLayer.clearLayers();
+      if(this.roomNameLayer != null){
+        this.roomNameLayer.clearLayers();
+
       let font_size_from_zoom_level = this.map._zoom - 13.3;
       this.addRoomNames(font_size_from_zoom_level);
       if (this.map._zoom > this.zoomLevelRemoveIcons) {
@@ -199,8 +201,9 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
           this.poiLayer = null;
         }
       }
-      this.previousZoomLevel = this.map._zoom;
+      this.previousZoomLevel = this.map._zoom;}
     });
+
     // endregion
   }
 
@@ -215,7 +218,7 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
           return L.marker(latlng, {
             icon: L.divIcon({
               className: 'room_label',
-              html: '<p style="font-size: ' + size + 'em"><b>' + feature.properties.name + '</b></p>',
+              html: '<p style="font-style: normal; font-size: ' + size + 'em;"><b>' + feature.properties.name + '</b></p>',
               iconAnchor: [15, 15]
             })
           });
