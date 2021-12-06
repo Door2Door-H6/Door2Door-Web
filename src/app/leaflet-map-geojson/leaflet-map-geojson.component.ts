@@ -99,6 +99,7 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
     this.addRoomNames(1);
     this.mapEvents();
     this.getWalls();
+    // this.addPoi();
 
   }
 
@@ -113,7 +114,7 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
       zoomSnap: 0,
       dragging: true,
       crs: L.CRS.EPSG3395,
-      zoomControl: false
+      zoomControl: true
     });
     // Set the map option to CRS EPSG3395 (Cordinate refence system) what cordinates system is to be used with geojson.
     // NOTE: the database is running EPSG4323
@@ -235,7 +236,15 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
 
       this.poiLayer = L.geoJSON(this.poiGeoJSON, {
         pointToLayer(feature, latlng) {
-          return L.marker(latlng, { icon: doorIcon },);
+            return L.marker(latlng, {
+              icon: L.divIcon({
+                html: '<svg height="100" width="100"><circle cx="50" cy="50" r="150" stroke="black" stroke-width="3" fill="red" />              </svg>',
+                iconAnchor: [15, 15]
+              })
+            });
+
+
+          // return L.marker(latlng, { icon: doorIcon },);
         }
       }).addTo(this.map);
     }
