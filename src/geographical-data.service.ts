@@ -1,13 +1,14 @@
-import {Injectable} from '@angular/core';
-import { observable, Observable,BehaviorSubject } from 'rxjs';
-import {ApiService} from './api.service';
+import { Injectable } from '@angular/core';
+import { observable, Observable, BehaviorSubject } from 'rxjs';
+import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GeographicalDataService {
 
-  path:BehaviorSubject<string> = new BehaviorSubject("1");
+  path: BehaviorSubject<string> = new BehaviorSubject("1");
+  public qrshowing$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false)
 
   constructor(private apiService: ApiService) {
   }
@@ -24,9 +25,10 @@ export class GeographicalDataService {
   public getLabelsGeoJSON(): Observable<any> {
     return this.apiService.getJSON('/RoomLabel?location=ss');
   }
-  public getPath(startpoiId:number,endpoiName:string) {
+  public getPath(startpoiId: number, endpoiName: string) {
 
-    let ops = this.apiService.getJSON('/Path?standId='+ startpoiId + '&roomName='+endpoiName);
+    this.qrshowing$.next(true);
+    let ops = this.apiService.getJSON('/Path?standId=' + startpoiId + '&roomName=' + endpoiName);
     ops.subscribe(x => {
       // console.log(x);
       this.path.next(x);

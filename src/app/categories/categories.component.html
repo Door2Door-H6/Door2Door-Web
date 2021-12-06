@@ -11,3 +11,8 @@
     </p>
   </mat-expansion-panel>
 </mat-accordion>
+<div *ngIf="showing">
+  <qrcode style="margin: 1em;" [elementType]="elementType" [level]="level" [qrdata]="qrdata" [scale]="scale"
+  [width]="width">
+</qrcode>
+</div>

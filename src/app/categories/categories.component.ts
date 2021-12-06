@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import {CategoryService} from '../../category.service';
 import { GeographicalDataService } from '../../geographical-data.service';
 
@@ -16,11 +17,23 @@ export class CategoriesComponent {
   panelOpenState = false;
   categories:string;
 
+  public qrdata: string = null;
+  public elementType: 'img' | 'url' | 'canvas' | 'svg' = null;
+  public level: 'L' | 'M' | 'Q' | 'H';
+  public scale: number;
+  public width: number;
+  public showing = false;
   constructor(private cateory: CategoryService,private dataservice: GeographicalDataService) {
     this.cateory.getCategoriesJSON().subscribe(result => {
 
       this.categories = result;
     });
+    this.dataservice.qrshowing$.subscribe(x=> {this.showing = x});
+    this.elementType = 'img';
+    this.level = 'M';
+    this.qrdata = 'https://door2door.dk';
+    this.scale = 1;
+    this.width = 128;
   }
 
   RouteRoom(event: string): void{
@@ -29,6 +42,7 @@ export class CategoriesComponent {
 
   catogoriesClick(roomName:string){
     this.dataservice.getPath(2,roomName)
+
 
   }
 
