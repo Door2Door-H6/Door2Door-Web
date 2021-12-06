@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import {CategoryService} from '../../category.service';
+import { CategoryService } from '../../category.service';
 import { GeographicalDataService } from '../../geographical-data.service';
 
 @Component({
@@ -14,39 +14,34 @@ import { GeographicalDataService } from '../../geographical-data.service';
 *this then gets the path and notifis all subscripers, hence the map opdates with the new rpute.
 * */
 export class CategoriesComponent {
+
+  /*-------Componet variables--------*/
   panelOpenState = false;
-  categories:string;
-
-  iconArray = ["edit","wc","collections","meeting_room","storage"];
+  categories: string;
+  /*-------End Componet variables--------*/
+  iconArray = ["edit", "wc", "collections", "meeting_room", "storage"];
   colorArray = ["blue", "grey", "darkred", "purple", "#36003d", "red"]
-
-  public qrdata: string = null;
-  public elementType: 'img' | 'url' | 'canvas' | 'svg' = null;
-  public level: 'L' | 'M' | 'Q' | 'H';
-  public scale: number;
-  public width: number;
+  /*-------QR code variables--------*/
+  public qrdata = 'https://door2door.dk/map';
+  public elementType: 'img' = null;
+  public level: 'M';
+  public scale = 1;
+  public width = 128;
   public showing = false;
-  constructor(private cateory: CategoryService,private dataservice: GeographicalDataService) {
-    this.cateory.getCategoriesJSON().subscribe(result => {
+  /*-------End code variables--------*/
 
-      this.categories = result;
-    });
-    this.dataservice.qrshowing$.subscribe(x=> {this.showing = x});
-    this.elementType = 'img';
-    this.level = 'M';
-    this.qrdata = 'https://door2door.dk/map';
-    this.scale = 1;
-    this.width = 128;
+  constructor(private cateory: CategoryService, private dataservice: GeographicalDataService) {
+    this.cateory.getCategoriesJSON().subscribe(result => {this.categories = result;});
+    this.dataservice.qrshowing$.subscribe(x => { this.showing = x }); // a simple boolan to show the qr code.
   }
 
-  RouteRoom(event: string): void{
-    console.log(event);
-  }
-
-  catogoriesClick(roomName:string){
-    this.dataservice.getPath(2,roomName)
-
-
+  /**
+   * calls the api for a route to the subllyed point
+   * (Note: this do not return rather it calls the service whcine then opdates the behavioursubject.)
+   * @param roomName the room/piont to navigate too.
+   */
+  catogoriesClick(roomName: string) {
+    this.dataservice.getPath(2, roomName);
   }
 
 }
