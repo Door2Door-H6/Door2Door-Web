@@ -31,7 +31,7 @@ export class CategoriesComponent {
     this.dataservice.qrshowing$.subscribe(x=> {this.showing = x});
     this.elementType = 'img';
     this.level = 'M';
-    this.qrdata = 'https://door2door.dk';
+    this.qrdata = 'https://door2door.dk/map';
     this.scale = 1;
     this.width = 128;
   }
