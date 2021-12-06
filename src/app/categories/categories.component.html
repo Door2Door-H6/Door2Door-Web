@@ -3,7 +3,7 @@
     <mat-expansion-panel-header>
       <mat-panel-title>{{keyname.name}}</mat-panel-title>
       <mat-panel-description>
-        <mat-icon>school</mat-icon>
+        <mat-icon [style.color]="colorArray[i]">{{iconArray[i]}}</mat-icon>
       </mat-panel-description>
     </mat-expansion-panel-header>
     <p *ngFor="let cat of categories[i].rooms" (click)="catogoriesClick(cat)">

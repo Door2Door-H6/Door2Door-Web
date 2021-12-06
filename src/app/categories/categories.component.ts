@@ -17,6 +17,9 @@ export class CategoriesComponent {
   panelOpenState = false;
   categories:string;
 
+  iconArray = ["edit","wc","collections","meeting_room","storage"];
+  colorArray = ["blue", "grey", "darkred", "purple", "#36003d", "red"]
+
   public qrdata: string = null;
   public elementType: 'img' | 'url' | 'canvas' | 'svg' = null;
   public level: 'L' | 'M' | 'Q' | 'H';
