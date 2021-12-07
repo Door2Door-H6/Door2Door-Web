@@ -22,7 +22,7 @@ export class CategoriesComponent {
   iconArray = ["edit", "wc", "collections", "meeting_room", "storage"];
   colorArray = ["blue", "grey", "darkred", "purple", "#36003d", "red"]
   /*-------QR code variables--------*/
-  public qrdata = 'https://door2door.dk/qr/'+this.dataservice.endpoi$.value;
+  public qrdata = 'https://door2door.dk/qr/'+ this.dataservice.endpoi$.value;
   public elementType: 'img' = null;
   public level: 'M';
   public scale = 1;
@@ -33,6 +33,9 @@ export class CategoriesComponent {
   constructor(private cateory: CategoryService, private dataservice: GeographicalDataService) {
     this.cateory.getCategoriesJSON().subscribe(result => {this.categories = result;});
     this.dataservice.qrshowing$.subscribe(x => { this.showing = x }); // a simple boolan to show the qr code.
+    this.dataservice.endpoi$.subscribe(x => {
+      this.qrdata = 'https://door2door.dk/qr/'+x;
+    });
   }
 
   /**
