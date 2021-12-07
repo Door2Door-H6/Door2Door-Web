@@ -28,6 +28,7 @@ export class CategoriesComponent {
   public scale = 1;
   public width = 128;
   public showing = false;
+  public qrinfo = "scan qr med mobil for din route";
   /*-------End code variables--------*/
 
   constructor(private cateory: CategoryService, private dataservice: GeographicalDataService) {
