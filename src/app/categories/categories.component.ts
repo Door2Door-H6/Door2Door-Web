@@ -22,7 +22,7 @@ export class CategoriesComponent {
   iconArray = ["edit", "wc", "collections", "meeting_room", "storage"];
   colorArray = ["blue", "grey", "darkred", "purple", "#36003d", "red"]
   /*-------QR code variables--------*/
-  public qrdata = 'https://door2door.dk/qr/'+this.dataservice.endpoi$;
+  public qrdata = 'https://door2door.dk/qr/'+this.dataservice.endpoi$.value;
   public elementType: 'img' = null;
   public level: 'M';
   public scale = 1;
