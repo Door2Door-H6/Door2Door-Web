@@ -28,6 +28,8 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
 
   constructor(private geographicalDataService: GeographicalDataService) {
 
+    console.log('a');
+
     //this leves here to make sure it gets a subscribement before the map is startede
     this.geographicalDataService.path.subscribe(x => {
       if (x.length != 1) {
