@@ -29,4 +29,15 @@ module.exports = function (config) {
     singleRun: false,
     restartOnFileChange: true
   });
+
+  customLaunchers: {
+    ChromiumHeadless: {
+      base: 'Chromium',
+        flags: [
+        '--headless'
+      ]
+    }
+  },
+  browsers: ['ChromiumHeadless'],
+    singleRun: true
 };
