@@ -5,6 +5,16 @@ module.exports = function (config) {
   config.set({
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    customLaunchers: {
+      ChromiumHeadless: {
+        base: 'Chromium',
+        flags: [
+          '--headless'
+        ]
+      }
+    },
+    browsers: ['ChromiumHeadless'],
+    singleRun: true,
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
@@ -29,15 +39,4 @@ module.exports = function (config) {
     singleRun: false,
     restartOnFileChange: true
   });
-
-  customLaunchers: {
-    ChromiumHeadless: {
-      base: 'Chromium',
-        flags: [
-        '--headless'
-      ]
-    }
-  },
-  browsers: ['ChromiumHeadless'],
-    singleRun: true
 };
