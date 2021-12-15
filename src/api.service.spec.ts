@@ -20,6 +20,7 @@ describe('ApiService', () => {
   });
 
   it('should be created', () => {
+    const service: ApiService = TestBed.get(ApiService);
     expect(service).toBeTruthy();
   });
 });
