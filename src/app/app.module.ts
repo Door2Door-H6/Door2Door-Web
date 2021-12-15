@@ -19,6 +19,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { MatInputModule } from '@angular/material/input';
 import {LeafletModule} from '@asymmetrik/ngx-leaflet';
 import { QrcodeComponent } from './qrcode/qrcode.component';
+import { RouteDescriptionComponent } from './route-description/route-description.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { QrcodeComponent } from './qrcode/qrcode.component';
     FrontpageComponent,
     LeafletMapGeojsonComponent,
     QrcodeComponent,
+    RouteDescriptionComponent,
   ],
   imports: [
     BrowserModule,
