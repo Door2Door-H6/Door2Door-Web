@@ -6,13 +6,17 @@ import { ApiService } from './api.service';
 
 describe('ApiService', () => {
   let service: ApiService;
+  let httpMock: HttpTestingController;
+  let httpClient: HttpClient;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [HttpClientTestingModule, HttpClient]
+      providers: [ApiService]
     });
     service = TestBed.inject(ApiService);
+    httpMock = TestBed.get(HttpTestingController);
+    httpClient = TestBed.inject(HttpClient);
   });
 
   it('should be created', () => {
