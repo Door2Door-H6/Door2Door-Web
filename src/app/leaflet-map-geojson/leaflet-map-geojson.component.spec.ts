@@ -13,7 +13,6 @@ describe('LeafletMapGeojsonComponent', () => {
         provide: GeographicalDataService,
         useClass: GeographicalDataService
       }],
-      declarations: [ LeafletMapGeojsonComponent ]
     })
     .compileComponents();
   }));
