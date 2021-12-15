@@ -6,14 +6,15 @@ module.exports = function (config) {
     basePath: '',
     frameworks: ['jasmine', '@angular-devkit/build-angular'],
     customLaunchers: {
-      ChromiumHeadless: {
-        base: 'Chromium',
+      MyChromiumHeadless: {
+        base: 'ChromiumHeadless',
         flags: [
-          '--headless'
+          '--headless',
+          '--disable-gpu'
         ]
       }
     },
-    browsers: ['ChromiumHeadless'],
+    browsers: ['MyChromiumHeadless'],
     singleRun: true,
     plugins: [
       require('karma-jasmine'),
@@ -36,7 +37,6 @@ module.exports = function (config) {
     logLevel: config.LOG_INFO,
     autoWatch: true,
     browsers: ['Chrome'],
-    singleRun: false,
     restartOnFileChange: true
   });
 };
