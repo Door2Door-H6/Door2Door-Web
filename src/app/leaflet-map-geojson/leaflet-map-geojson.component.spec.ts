@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ApiService } from '../../api.service';
 import { GeographicalDataService } from '../../geographical-data.service';
 
 import { LeafletMapGeojsonComponent } from './leaflet-map-geojson.component';
@@ -11,7 +12,7 @@ describe('LeafletMapGeojsonComponent', () => {
     TestBed.configureTestingModule({
       providers: [LeafletMapGeojsonComponent, {
         provide: GeographicalDataService,
-        useClass: GeographicalDataService
+        useClass: ApiService
       }],
     })
     .compileComponents();
