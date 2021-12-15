@@ -16,7 +16,6 @@ export class ApiService {
   }
 
   public getJSON(endPoint: string): Observable<any> {
-    //console.log(this.httpClient.get(this.baseURL + endPoint));
     return this.httpClient.get(this.baseURL + endPoint)
   }
 }

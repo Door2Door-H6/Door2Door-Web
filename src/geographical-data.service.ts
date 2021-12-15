@@ -15,16 +15,16 @@ export class GeographicalDataService {
   }
 
   public getWallsGeoJSON(): Observable<any> {
-    return this.apiService.getJSON('/Wall?location=sr');
+    return this.apiService.getJSON('/Wall?location=zbc');
   }
   public getRoomGeoJSON(): Observable<any> {
-    return this.apiService.getJSON('/Room?location=xx');
+    return this.apiService.getJSON('/Room?location=zbc');
   }
   public getPoiGeoJSON(): Observable<any> {
-    return this.apiService.getJSON('/Poi?location=ss');
+    return this.apiService.getJSON('/Poi?location=zbc');
   }
   public getLabelsGeoJSON(): Observable<any> {
-    return this.apiService.getJSON('/RoomLabel?location=ss');
+    return this.apiService.getJSON('/RoomLabel?location=zbc');
   }
   public getPath(startpoiId: number, endpoiName: string) {
     this.endpoi$.next(endpoiName);

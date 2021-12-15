@@ -20,6 +20,7 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
   private poiGeoJSON;
   private roomNameGeoJSON;
   private previousZoomLevel = 0;
+  standerid = 7;
   pathlayer;
   private antpath;
   path: string;
@@ -143,9 +144,9 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
     });
   }
 
-/**
- * Clik event to show the path/Route on the map when the user clicks on the map.
- */
+  /**
+   * Clik event to show the path/Route on the map when the user clicks on the map.
+   */
   private mapEvents() {
     this.map.on('click', ev => {
       let tmp_room_name = ev.originalEvent.target.innerHTML;
@@ -167,26 +168,27 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
 
     this.map.on('zoomend', (e: Event) => {
       /// console.log(this.map._zoom);
-      if(this.roomNameLayer != null){
+      if (this.roomNameLayer != null) {
         this.roomNameLayer.clearLayers();
 
-      let font_size_from_zoom_level = this.map._zoom - 13.3;
-      this.addRoomNames(font_size_from_zoom_level);
-      if (this.map._zoom > this.zoomLevelRemoveIcons) {
-        this.addPoi();
+        let font_size_from_zoom_level = this.map._zoom - 13.3;
+        this.addRoomNames(font_size_from_zoom_level);
+        if (this.map._zoom > this.zoomLevelRemoveIcons) {
+          this.addPoi();
 
-        if (this.previousZoomLevel < this.map._zoom) {
+          if (this.previousZoomLevel < this.map._zoom) {
 
+          }
+        } else {
+          if (this.previousZoomLevel > this.map._zoom) {
+          }
+          if (this.poiLayer != null) {
+            this.poiLayer.clearLayers();
+            this.poiLayer = null;
+          }
         }
-      } else {
-        if (this.previousZoomLevel > this.map._zoom) {
-        }
-        if (this.poiLayer != null) {
-          this.poiLayer.clearLayers();
-          this.poiLayer = null;
-        }
+        this.previousZoomLevel = this.map._zoom;
       }
-      this.previousZoomLevel = this.map._zoom;}
     });
 
     // endregion
@@ -235,12 +237,12 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
 
       this.poiLayer = L.geoJSON(this.poiGeoJSON, {
         pointToLayer(feature, latlng) {
-            return L.marker(latlng, {
-              icon: L.divIcon({
-                html: '<svg height="100" width="100"><circle cx="50" cy="50" r="150" stroke="black" stroke-width="3" fill="red" />              </svg>',
-                iconAnchor: [15, 15]
-              })
-            });
+          return L.marker(latlng, {
+            icon: L.divIcon({
+              html: '<svg height="100" width="100"><circle cx="50" cy="50" r="150" stroke="black" stroke-width="3" fill="red" />              </svg>',
+              iconAnchor: [15, 15]
+            })
+          });
 
 
           // return L.marker(latlng, { icon: doorIcon },);
@@ -248,6 +250,9 @@ export class LeafletMapGeojsonComponent implements AfterViewInit {
       }).addTo(this.map);
     }
   }
+
+//'/assets/marker.png'
+
 
   ngAfterViewInit(): void {
     this.initMap();
