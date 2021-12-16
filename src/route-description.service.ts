@@ -11,7 +11,7 @@ export class RouteDescriptionService {
 
   public GetRouteDescription(location: string): Observable<string[]> {
     return Observable.create(function (observer) {
-      observer.next(['Drej til hjøre', 'Følg gangen til enden', location + ' er nu til højre']);
+      observer.next(['Drej til højre', 'Følg gangen til enden', location + ' er nu til højre']);
       observer.complete();
     });
   }
