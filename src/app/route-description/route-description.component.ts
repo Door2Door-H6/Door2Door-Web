@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDividerModule } from '@angular/material/divider';
 import { ActivatedRoute } from '@angular/router';
 import { GeographicalDataService } from '../../geographical-data.service';
 import { RouteDescriptionService } from '../../route-description.service';
@@ -10,12 +11,16 @@ import { RouteDescriptionService } from '../../route-description.service';
 })
 
 export class RouteDescriptionComponent implements OnInit {
-  routeDescription = '';
+  routeDescription: string[];
   endpoi: any;
   path;
 
-  constructor() {
-
+  constructor(private geoDataService: GeographicalDataService, private routeDescriptionService: RouteDescriptionService) {
+    this.geoDataService.endpoi$.subscribe(location => {
+      this.routeDescriptionService.GetRouteDescription(location).subscribe(routeDescriptionFromService => {
+        this.routeDescription = routeDescriptionFromService
+      })
+    });
   }
 
   ngOnInit(): void {

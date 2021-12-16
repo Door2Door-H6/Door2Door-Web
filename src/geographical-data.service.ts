@@ -33,7 +33,6 @@ export class GeographicalDataService {
     ops.subscribe(x => {
       // console.log(x);
       this.path.next(x);
-
     })
   }
 

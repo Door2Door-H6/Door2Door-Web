@@ -9,9 +9,9 @@ export class RouteDescriptionService {
 
   constructor(private apiService: ApiService) { }
 
-  public GetRouteDescription(location: string): Observable<string> {
+  public GetRouteDescription(location: string): Observable<string[]> {
     return Observable.create(function (observer) {
-      observer.next('Drej til hjøre\nFølg gangen til enden\n' + location + ' til højre');
+      observer.next(['Drej til hjøre', 'Følg gangen til enden', location + ' er nu til højre']);
       observer.complete();
     });
   }
