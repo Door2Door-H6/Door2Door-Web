@@ -15,8 +15,13 @@ export class RouteDescriptionComponent implements OnInit {
   endpoi: any;
   path;
 
-  constructor() {
-
+  constructor(private geoDataService: GeographicalDataService, private routeDescriptionService: RouteDescriptionService)
+  {
+    this.geoDataService.endpoi$.subscribe(location => {
+      this.routeDescriptionService.GetRouteDescription(location).subscribe(routeDescriptionFromService => {
+        this.routeDescription = routeDescriptionFromService
+      })
+    });
   }
 
 
