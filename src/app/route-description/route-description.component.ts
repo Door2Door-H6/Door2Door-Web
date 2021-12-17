@@ -16,7 +16,11 @@ export class RouteDescriptionComponent implements OnInit {
   path;
 
   constructor(private geoService: GeographicalDataService, private routeDescriptionService: RouteDescriptionService) {
-    console.log('a');
+    geoService.endpoi$.subscribe(locationName =>{
+      routeDescriptionService.GetRouteDescription(locationName).subscribe(routeDEscriptionFromApi =>{
+        this.routeDescription = routeDEscriptionFromApi;
+      })
+    })
   }
 
 
