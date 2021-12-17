@@ -16,7 +16,7 @@ export class RouteDescriptionComponent implements OnInit {
   path;
 
   constructor(private geoService: GeographicalDataService, private routeDescriptionService: RouteDescriptionService) {
-
+    console.log('a');
   }
 
 
